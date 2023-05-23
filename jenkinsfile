@@ -1,12 +1,8 @@
-pipeline 
-{
+pipeline {
     agent {label "Build_Server"}
-    stages 
-    {
-        stage ("This stage will build the package")
-        {
-            steps 
-            {
+    stages {
+        stage ("This stage will build the package") {
+            steps {
                 sh "mvn clean"
                 sh "mvn install"
             }
