@@ -1,11 +1,18 @@
 pipeline {
     agent {label "Build_Server"}
     stages {
-        stage ("This stage will build the package") {
+        stage ("This stage will build the package.") {
             steps {
                 sh "mvn clean"
                 sh "mvn install"
             }
+            
+        }
+        stage ("This stage will copy the package to a S3 bucket.") {
+            steps {
+                sh "aws s3 cp /home/ubuntu/Build_Server/workspace/DSPipeline/target/demo1.war s3://sankalpkabucket"
+            }
+            
         }
     }
 }
