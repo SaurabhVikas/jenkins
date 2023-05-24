@@ -28,17 +28,6 @@ pipeline {
                                     }
 	                        }
                     }
-	            //STAGE-3
-	                stage ("This will stash the package on build server.")
-	                {
-                        steps 
-	                        {
-		                        node ("Build_Server")
-		                            {
-                                        stash( includes:"target/demo1.war", name: "stashedCode")
-                                    }
-	                        }
-                    }
 }
 }
 build 'CodeDeploy'
