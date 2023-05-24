@@ -13,8 +13,10 @@ pipeline {
         }
         stage ("This stage will copy the package from build server to a S3 bucket.") {
             steps {
+		node ("Build_Server"){
                 sh "aws s3 cp /home/ubuntu/Build_Server/workspace/DSPipeline/target/demo1.war s3://sankalpkabucket"
             }
+	}
             
         }
     }
