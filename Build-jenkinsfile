@@ -1,7 +1,7 @@
 pipeline {
     	    agent {label "Build_Server"}
     	    //agent any
-            build_package = "/home/ubuntu/Build_Server/workspace/DSPipeline/target/demo1.war"
+            build_package = "/home/ubuntu/Build_Server/workspace/CodeBuild@2/target/demo1.war"
 	        stages 
                 {
      	        //STAGE-1
