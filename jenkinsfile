@@ -10,6 +10,7 @@ pipeline {
 	     {
                 node ("Build_Server")
 		{
+		checkout scmGit(branches: [[name: '*/jenkinsBranch']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/SaurabhVikas/jenkins.git']])
 		 sh "mvn clean"
                  sh "mvn install"
 		}
