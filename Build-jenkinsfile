@@ -26,7 +26,7 @@ pipeline {
 	                        {
 		                        node ("Build_Server")
 		                            {
-                                        sh "aws s3 cp {env.build_package} s3://sankalpkabucket"
+                                        sh "aws s3 cp env.build_package s3://sankalpkabucket"
                                     }
 	                        }
                     }
