@@ -1,9 +1,11 @@
 pipeline {
-    agent {label "Build_Server"}
-    stages {
+    //agent {label "Build_Server"}
+    agent any
+	stages {
         stage ("This stage will build the code!") {
             steps {
-                sh "mvn clean"
+                node ("Build_Server")
+		sh "mvn clean"
                 sh "mvn install"
             }
             
