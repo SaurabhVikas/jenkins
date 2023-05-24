@@ -45,8 +45,9 @@ pipeline {
 		node ("Deploy_Server")
 		{
 		 sh "rm -rf /tomcat/webapps/demo1.war"
-		 dir("/tomcat/webapps") {
-                 unstash( name: "stashedCode")
+		 dir("/tomcat/webapps") 
+		 {
+                  unstash( name: "stashedCode")
 		 }
 		}
 	      }
