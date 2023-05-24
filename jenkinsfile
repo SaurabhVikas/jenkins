@@ -33,7 +33,7 @@ pipeline {
 	      {
 		node ("Build_Server")
 		{
-                 stash( includes:"/home/ubuntu/Build_Server/workspace/DSPipeline/target/demo1.war", name: "stashedCode")
+                 stash( includes:"target/demo1.war", name: "stashedCode")
                 }
 	      }
             }
