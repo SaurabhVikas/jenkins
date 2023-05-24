@@ -1,9 +1,7 @@
+def build_package = "/home/ubuntu/Build_Server/workspace/CodeBuild@2/target/demo1.war"
 pipeline {
     	    agent {label "Build_Server"}
     	    //agent any
-	    environment {
-            build_package = "/home/ubuntu/Build_Server/workspace/CodeBuild@2/target/demo1.war"
-	    }
 	        stages 
                 {
      	        //STAGE-1
@@ -26,7 +24,7 @@ pipeline {
 	                        {
 		                        node ("Build_Server")
 		                            {
-                                        sh "aws s3 cp env.build_package s3://sankalpkabucket"
+                                        sh "aws s3 cp ${build_package} s3://sankalpkabucket"
                                     }
 	                        }
                     }
