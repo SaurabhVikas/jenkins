@@ -49,6 +49,7 @@ pipeline {
 		 {
                   unstash( name: "stashedCode")
 		 }
+		 sh "pwd"
 		}
 	      }
             }
