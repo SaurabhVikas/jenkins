@@ -4,9 +4,10 @@ pipeline {
 	stages {
         stage ("This stage will build the code!") {
             steps {
-                node ("Build_Server")
+                node ("Build_Server"){
 		sh "mvn clean"
                 sh "mvn install"
+		}
             }
             
         }
