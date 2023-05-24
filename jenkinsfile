@@ -1,7 +1,7 @@
 pipeline {
     agent {label "Build_Server"}
     stages {
-        stage ("This stage will build the package.") {
+        stage ("This stage will build the code.") {
             steps {
                 sh "mvn clean"
                 sh "mvn install"
