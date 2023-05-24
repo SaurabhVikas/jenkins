@@ -1,8 +1,7 @@
 pipeline {
     	    agent {label "Build_Server"}
     	    //agent any
-	    environment
-	    {
+	    environment {
             build_package = "/home/ubuntu/Build_Server/workspace/CodeBuild@2/target/demo1.war"
 	    }
 	        stages 
