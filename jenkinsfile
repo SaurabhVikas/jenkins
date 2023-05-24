@@ -1,23 +1,55 @@
 pipeline {
-    //agent {label "Build_Server"}
-    agent any
-	stages {
-        stage ("This stage will build the code!") {
-            steps {
-                node ("Build_Server"){
-		sh "mvn clean"
-                sh "mvn install"
+    	  //agent {label "Build_Server"}
+    	  agent any
+	  stages 
+	  {
+     	    //STAGE-1
+	    stage ("This stage will build the code!") 
+	    {
+             steps 
+	     {
+                node ("Build_Server")
+		{
+		 sh "mvn clean"
+                 sh "mvn install"
 		}
+             }
             }
-            
-        }
-        stage ("This stage will copy the package from build server to a S3 bucket.") {
-            steps {
-		node ("Build_Server"){
-                sh "aws s3 cp /home/ubuntu/Build_Server/workspace/DSPipeline/target/demo1.war s3://sankalpkabucket"
+	    //STAGE-2
+            stage ("This stage will copy the package from build server to a S3 bucket.")
+	    {
+             steps 
+	      {
+		node ("Build_Server")
+		{
+                 sh "aws s3 cp /home/ubuntu/Build_Server/workspace/DSPipeline/target/demo1.war s3://sankalpkabucket"
+                }
+	      }
             }
-	}
-            
-        }
-    }
-}
+	    //STAGE-3
+	    stage ("This will stash the package on build server.")
+	    {
+             steps 
+	      {
+		node ("Build_Server")
+		{
+                 stash( includes:"/home/ubuntu/Build_Server/workspace/DSPipeline/target/demo1.war", name:"stashedCode")
+                }
+	      }
+            }
+	    //STAGE-4
+	    stage ("This will un-stash the package on deploy server.")
+	    {
+             steps 
+	      {
+		node ("Deploy_Server")
+		{
+		 sh "rm -rf /tomcat/webapps/demo1.war"
+		 dir ("/tomcat/webapps") {
+                 unstash( name:"stashedCode")
+		 }
+		}
+	      }
+            }
+	 }
+       }
