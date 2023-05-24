@@ -1,6 +1,7 @@
 pipeline {
     	    agent {label "Build_Server"}
     	    //agent any
+            build_package = "/home/ubuntu/Build_Server/workspace/DSPipeline/target/demo1.war"
 	        stages 
                 {
      	        //STAGE-1
@@ -23,7 +24,7 @@ pipeline {
 	                        {
 		                        node ("Build_Server")
 		                            {
-                                        sh "aws s3 cp /home/ubuntu/Build_Server/workspace/DSPipeline/target/demo1.war s3://sankalpkabucket"
+                                        sh "aws s3 cp {$build_package} s3://sankalpkabucket"
                                     }
 	                        }
                     }
